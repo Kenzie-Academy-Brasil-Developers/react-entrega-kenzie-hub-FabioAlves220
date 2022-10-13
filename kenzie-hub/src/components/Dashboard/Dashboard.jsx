@@ -4,10 +4,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 import "../Dashboard/Dashboard.css";
-function Dashboard() {
-  const [user, setUser] = useState("");
+import { useNavigate } from "react-router-dom";
+function Dashboard({ user, setUser }) {
   const [module, setModule] = useState("");
-  console.log("usefect rodou");
+  //----------
   useEffect(() => {
     async function getUser() {
       /* trycatch é uma estrutura que tentativa e erro, cada linha presente em try recebe uma tentativa de execução, caso haja erro, o código cai em catch */
@@ -16,7 +16,8 @@ function Dashboard() {
         const userId = localStorage.getItem("@USERID");
         const response = await api.get(`/users/${userId}`);
         console.log(userId);
-        setUser(response.data.name);
+        setUser(response.data);
+        console.log(response);
         setModule(response.data.course_module);
       } catch (error) {
         console.log(error);
@@ -28,10 +29,13 @@ function Dashboard() {
     getUser();
   }, []);
 
+  //----------
+  //----------
+
   return (
     <>
       <div className="dashboardBox">
-        <h1 className="userName">Olá, {user}</h1>
+        <h1 className="userName">Olá, {user.name}</h1>
         <span className="spanModulo">{module}</span>
       </div>
       <div className="notReadyWarning">

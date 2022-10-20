@@ -4,8 +4,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { FormBox } from "./styles.js";
-
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 function Register() {
+  const {} = useContext(UserContext);
   const formSchema = yup.object().shape({
     email: yup.string().required("Email obrigatório").email("Email inválido"),
     password: yup

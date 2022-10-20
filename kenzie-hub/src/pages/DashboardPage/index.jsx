@@ -1,12 +1,16 @@
 import api from "../../services/api";
 import "./index.jsx";
 import RegisterLogo from "../../assets/RegisterLogo.png";
-import Dashboard from "../../components/Dashboard/Dashboard";
+import Dashboard from "../../components/Dashboard/index";
 import { useNavigate } from "react-router-dom";
 import { AppMainDashboard, Header } from "./styles";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
-const DashboardPage = ({ user, setUser }) => {
+const DashboardPage = () => {
   const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+
   function logout() {
     setUser("");
     localStorage.clear();
@@ -26,7 +30,7 @@ const DashboardPage = ({ user, setUser }) => {
           Sair
         </button>
       </Header>
-      <Dashboard user={user} setUser={setUser} />
+      <Dashboard />
     </AppMainDashboard>
   );
 };

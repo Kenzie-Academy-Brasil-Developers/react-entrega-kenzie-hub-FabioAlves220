@@ -4,10 +4,12 @@ import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage/index";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { UserProvider } from "./contexts/UserContext";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 function App() {
   const [currentPath, setCurrentPath] = useState("");
-  const [user, setUser] = useState(null);
+
   //----------
   useEffect(() => {
     setCurrentPath(window.location.pathname);
@@ -21,16 +23,15 @@ function App() {
     <>
       {/* <header className="App-header"></header> */}
       <Routes>
-        <Route path="/" element={<LoginPage setUser={setUser} />} />
+        <Route path="/" element={<LoginPage />} />
         <Route
           path="/register"
           element={<RegisterPage />}
           setCurrentPath={setCurrentPath}
         />
-        <Route
-          path="/dashboard"
-          element={<DashboardPage user={user} setUser={setUser} />}
-        />
+        <Route path="/dashboard" element={<ProtectedRoutes />}>
+          <Route index element={<DashboardPage />} />
+        </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>

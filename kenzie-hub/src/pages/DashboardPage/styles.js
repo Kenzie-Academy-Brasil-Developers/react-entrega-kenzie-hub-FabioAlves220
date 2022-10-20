@@ -10,7 +10,7 @@ export const AppMainDashboard = styled.div`
 export const Header = styled.header`
   width: 100vw;
   height: 72px;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   display: flex;
@@ -36,5 +36,9 @@ export const Header = styled.header`
     line-height: 28px;
     color: #f8f9fa;
     cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    padding-left: 3%;
+    padding-right: 3%;
   }
 `;

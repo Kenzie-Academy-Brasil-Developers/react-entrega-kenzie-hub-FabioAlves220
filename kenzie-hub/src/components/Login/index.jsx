@@ -3,37 +3,22 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext";
 
-function Login({ setUser }) {
+function Login({}) {
   const [loading, setLoading] = useState(false);
-
+  const { userLogin } = useContext(UserContext);
   const loginSchema = yup.object().shape({
     email: yup.string().required("Email obrigatório").email("Email inválido"),
     password: yup.string().required("Senha obrigatória"),
   });
   //----------
 
-  async function onSubmitFunction(data) {
-    /* trycatch é uma estrutura que tentativa e erro, cada linha presente em try recebe uma tentativa de execução, caso haja erro, o código cai em catch */
-    try {
-      setLoading(true);
-      const response = await api.post("/sessions", data);
-      localStorage.clear();
-      localStorage.setItem("@TOKEN", response.data.token);
-      localStorage.setItem("@USERID", response.data.user.id);
-      setUser(response.data.user);
-      navigate("/dashboard");
-
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-      /* finally é sempre executado independente de qualquer cenário */
-    } finally {
-      setLoading(false);
-    }
-  }
+  const submit = async (data) => {
+    userLogin(data, setLoading);
+  };
   //----------
   const {
     register,
@@ -48,7 +33,7 @@ function Login({ setUser }) {
   return (
     <FormBox>
       <h1 className="loginTitle">Login</h1>
-      <form className="form" onSubmit={handleSubmit(onSubmitFunction)}>
+      <form className="form" onSubmit={handleSubmit(submit)}>
         <label className="emailLabel">Email</label>
         <input placeholder="Email" {...register("email")} />
         <span className="emailErrorMessage">{errors.email?.message}</span>

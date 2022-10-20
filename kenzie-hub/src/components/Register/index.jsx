@@ -6,8 +6,10 @@ import api from "../../services/api";
 import { FormBox } from "./styles.js";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 function Register() {
   const {} = useContext(UserContext);
+  const navigate = useNavigate();
   const formSchema = yup.object().shape({
     email: yup.string().required("Email obrigatório").email("Email inválido"),
     password: yup
@@ -30,6 +32,7 @@ function Register() {
   async function onSubmitFunction(data) {
     const response = await api.post("/users", data);
     console.log(response);
+    navigate("/");
   }
   console.log(errors);
 
@@ -42,7 +45,7 @@ function Register() {
         <input placeholder="Email" {...register("email")} />
         <span className="errorMessage">{errors.email?.message}</span>
         <label className="passwordLabel">Senha</label>
-        <input placeholder="Senha" {...register("password")} />
+        <input type="password" placeholder="Senha" {...register("password")} />
         <span className="errorMessage">{errors.password?.message}</span>
         <label className="namelLabel">Nome</label>
         <input placeholder="Nome" {...register("name")} />

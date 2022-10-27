@@ -1,8 +1,8 @@
-import "./index.jsx";
+// import "./index.js";
 import RegisterLogo from "../../assets/RegisterLogo.png";
 import { useEffect } from "react";
 import Login from "../../components/Login";
-import { AppMainLogin, LogoBox } from "./styles.js";
+import { AppMainLogin, LogoBox } from "./styles";
 const LoginPage = ({}) => {
   return (
     <AppMainLogin>

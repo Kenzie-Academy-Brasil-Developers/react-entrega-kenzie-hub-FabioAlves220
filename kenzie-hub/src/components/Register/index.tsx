@@ -1,12 +1,22 @@
-import "./styles.js";
+import "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
-import { FormBox } from "./styles.js";
+import { FormBox } from "./styles";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+
+export interface IRegisterFormData {
+  email: string;
+  password: string;
+  name: string;
+  bio: string;
+  contact: string;
+  course_module: string;
+}
+
 function Register() {
   const {} = useContext(UserContext);
   const navigate = useNavigate();
@@ -26,10 +36,10 @@ function Register() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IRegisterFormData>({
     resolver: yupResolver(formSchema),
   });
-  async function onSubmitFunction(data) {
+  async function onSubmitFunction(data: IRegisterFormData) {
     const response = await api.post("/users", data);
     console.log(response);
     navigate("/");

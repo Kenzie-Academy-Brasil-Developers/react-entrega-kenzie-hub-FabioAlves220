@@ -1,8 +1,8 @@
-import "./styles.js";
+import "./styles";
 import Register from "../../components/Register";
 import RegisterLogo from "../../assets/RegisterLogo.png";
 import { useEffect } from "react";
-import { AppMainRegister, LogoAndButtonBox } from "./styles.js";
+import { AppMainRegister, LogoAndButtonBox } from "./styles";
 import { useNavigate } from "react-router-dom";
 const RegisterPage = () => {
   const navigate = useNavigate();

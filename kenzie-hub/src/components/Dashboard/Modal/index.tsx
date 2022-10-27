@@ -6,7 +6,16 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-export const Modal = ({ isModalVisible, setIsModalVisible }) => {
+export interface IModalProps {
+  isModalVisible: boolean;
+  setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export interface IModalSubmit {
+  title: string;
+  status: string;
+}
+
+export const Modal = ({ isModalVisible, setIsModalVisible }: IModalProps) => {
   const [loading, setLoading] = useState(false);
   const { addTech } = useContext(UserContext);
   const addTechSchema = yup.object().shape({
@@ -14,7 +23,7 @@ export const Modal = ({ isModalVisible, setIsModalVisible }) => {
     status: yup.string().required("Status obrigatório"),
   });
   //----------
-  const submit = async (data) => {
+  const submit = async (data: IModalSubmit) => {
     console.log(data);
     addTech(data, setLoading);
     setIsModalVisible(false);
@@ -24,7 +33,7 @@ export const Modal = ({ isModalVisible, setIsModalVisible }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IModalSubmit>({
     resolver: yupResolver(addTechSchema),
   });
   //----------
@@ -74,4 +83,5 @@ export const Modal = ({ isModalVisible, setIsModalVisible }) => {
       </ModalBox>
     );
   }
+  return null;
 };

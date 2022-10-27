@@ -7,6 +7,11 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 
+export interface ILoginFormData {
+  email: string;
+  password: string;
+}
+
 function Login({}) {
   const [loading, setLoading] = useState(false);
   const { userLogin } = useContext(UserContext);
@@ -16,7 +21,7 @@ function Login({}) {
   });
   //----------
 
-  const submit = async (data) => {
+  const submit = async (data: ILoginFormData) => {
     userLogin(data, setLoading);
   };
   //----------
@@ -24,7 +29,7 @@ function Login({}) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ILoginFormData>({
     resolver: yupResolver(loginSchema),
   });
   //----------

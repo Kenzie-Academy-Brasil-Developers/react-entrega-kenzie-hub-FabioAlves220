@@ -1,5 +1,5 @@
-import api from "../../services/api";
-import "./index.jsx";
+// import api from "../../services/api";
+// import "./index.js";
 import RegisterLogo from "../../assets/RegisterLogo.png";
 import Dashboard from "../../components/Dashboard/index";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ const DashboardPage = () => {
   const { user, setUser } = useContext(UserContext);
 
   function logout() {
-    setUser("");
+    setUser(null);
     localStorage.clear();
     navigate("/login");
   }

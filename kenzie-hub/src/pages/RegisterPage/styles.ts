@@ -11,15 +11,17 @@ export const AppMainRegister = styled.div`
 AppMainRegister.displayName = "AppMainRegister";
 
 export const LogoAndButtonBox = styled.div`
-  width: 370px;
+  width: 30%;
+  min-width: 375px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
   margin-bottom: 8px;
 
   .registerLogo {
     width: 122px;
-    height: 21px;
+    height: 20px;
   }
   .voltarButton {
     background: #212529;

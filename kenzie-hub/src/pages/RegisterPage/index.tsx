@@ -9,7 +9,7 @@ const RegisterPage = () => {
   return (
     <AppMainRegister>
       <LogoAndButtonBox>
-        <img className="registerLogo" src={RegisterLogo} />
+        <img className="registerLogo" src={RegisterLogo} alt="register logo" />
         <button onClick={() => navigate("/home")} className="voltarButton">
           voltar
         </button>

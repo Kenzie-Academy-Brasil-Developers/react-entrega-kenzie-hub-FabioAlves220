@@ -16,7 +16,6 @@ export interface IModalSubmit {
 }
 
 export const Modal = ({ isModalVisible, setIsModalVisible }: IModalProps) => {
-  const [loading, setLoading] = useState(false);
   const { addTech } = useContext(UserContext);
   const addTechSchema = yup.object().shape({
     title: yup.string().required("Título obrigatório"),
@@ -24,8 +23,7 @@ export const Modal = ({ isModalVisible, setIsModalVisible }: IModalProps) => {
   });
   //----------
   const submit = async (data: IModalSubmit) => {
-    console.log(data);
-    addTech(data, setLoading);
+    addTech(data);
     setIsModalVisible(false);
   };
   //----------

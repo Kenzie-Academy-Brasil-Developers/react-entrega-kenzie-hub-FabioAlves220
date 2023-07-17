@@ -9,11 +9,11 @@ export const AppMainLogin = styled.div`
   background-color: #121214;
 `;
 export const LogoBox = styled.div`
-  margin-bottom: 45px;
+  margin-bottom: 15px;
 
   .registerLogo {
     width: 122px;
-    height: 21px;
+    height: 19px;
   }
   .voltarButton {
     background: #212529;

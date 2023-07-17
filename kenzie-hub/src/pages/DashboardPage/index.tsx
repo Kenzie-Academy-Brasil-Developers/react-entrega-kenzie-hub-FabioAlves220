@@ -20,7 +20,7 @@ const DashboardPage = () => {
   return (
     <AppMainDashboard>
       <Header>
-        <img className="registerLogo" src={RegisterLogo} />
+        <img className="registerLogo" src={RegisterLogo} alt="Logo" />
         <button
           onClick={() => {
             logout();

@@ -12,8 +12,7 @@ export interface ILoginFormData {
   password: string;
 }
 
-function Login({}) {
-  const [loading, setLoading] = useState(false);
+function Login() {
   const { userLogin } = useContext(UserContext);
   const loginSchema = yup.object().shape({
     email: yup.string().required("Email obrigatório").email("Email inválido"),
@@ -22,7 +21,7 @@ function Login({}) {
   //----------
 
   const submit = async (data: ILoginFormData) => {
-    userLogin(data, setLoading);
+    userLogin(data);
   };
   //----------
   const {

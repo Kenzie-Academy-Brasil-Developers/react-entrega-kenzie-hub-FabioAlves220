@@ -1,13 +1,12 @@
 // import "./index.js";
 import RegisterLogo from "../../assets/RegisterLogo.png";
-import { useEffect } from "react";
 import Login from "../../components/Login";
 import { AppMainLogin, LogoBox } from "./styles";
-const LoginPage = ({}) => {
+const LoginPage = () => {
   return (
     <AppMainLogin>
       <LogoBox>
-        <img className="registerLogo" src={RegisterLogo} />
+        <img className="registerLogo" src={RegisterLogo} alt="Logo" />
       </LogoBox>
       <Login />
     </AppMainLogin>

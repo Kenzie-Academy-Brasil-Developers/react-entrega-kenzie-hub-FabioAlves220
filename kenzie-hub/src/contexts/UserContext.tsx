@@ -10,9 +10,11 @@ import { string } from "yup";
 import { ILoginFormData } from "../components/Login";
 import { IRegisterFormData } from "../components/Register";
 import api from "../services/api";
+
 interface IUserContextProps {
   children: React.ReactNode;
 }
+
 interface IUserResponse {
   id: string;
   name: string;
@@ -26,6 +28,7 @@ interface IUserResponse {
   update_at: Date;
   avatar_url: string;
 }
+
 interface ITech {
   id: string;
   title: string;
@@ -49,20 +52,13 @@ interface IAddTech {
 
 export interface IUserContext {
   user: IUserResponse | null;
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
   getUser: () => void;
   setUser: React.Dispatch<React.SetStateAction<IUserResponse | null>>;
-  userLogin: (
-    data: ILoginFormData,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) => void;
-  userRegister: (
-    data: IRegisterFormData,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) => void;
-  addTech: (
-    data: IAddTech,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) => void;
+  userLogin: (data: ILoginFormData) => void;
+  userRegister: (data: IRegisterFormData) => void;
+  addTech: (data: IAddTech) => void;
   deleteTech: (id: string) => void;
   techList: ITech[];
   currentRoute: string | null;
@@ -85,6 +81,7 @@ export const UserProvider = ({ children }: IUserContextProps) => {
   const [user, setUser] = useState<IUserResponse | null>(null);
   const [currentRoute, setCurrentRoute] = useState<string | null>(null);
   const [techList, setTechList] = useState([] as ITech[]);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   //----------
   const getUser = async () => {
@@ -103,10 +100,7 @@ export const UserProvider = ({ children }: IUserContextProps) => {
     }
   };
   //---------
-  const userLogin = async (
-    data: ILoginFormData,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) => {
+  const userLogin = async (data: ILoginFormData) => {
     try {
       setLoading(true);
       const response = await api.post("/sessions", data);
@@ -118,16 +112,14 @@ export const UserProvider = ({ children }: IUserContextProps) => {
       getUser();
       navigate("/dashboard");
     } catch (error) {
+      console.log(error);
       //   toast.error(error.response.data.error);
     } finally {
       setLoading(false);
     }
   };
   //---------
-  const userRegister = async (
-    data: IRegisterFormData,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) => {
+  const userRegister = async (data: IRegisterFormData) => {
     try {
       setLoading(true);
       const response = await api.post("/users", data);
@@ -142,13 +134,10 @@ export const UserProvider = ({ children }: IUserContextProps) => {
     }
   };
   //---------
-  const addTech = async (
-    data: IAddTech,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) => {
+  const addTech = async (data: IAddTech) => {
     try {
-      setLoading(true);
       const response = await api.post("/users/techs", data);
+      setLoading(true);
       getUser();
     } catch (error) {
       console.log(error);
@@ -176,6 +165,8 @@ export const UserProvider = ({ children }: IUserContextProps) => {
   return (
     <UserContext.Provider
       value={{
+        loading,
+        setLoading,
         user,
         getUser,
         setUser,

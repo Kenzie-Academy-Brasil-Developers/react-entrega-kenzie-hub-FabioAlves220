@@ -1,19 +1,27 @@
 import styled from "styled-components";
-export const AppMainLogin = styled.div`
+export const AppMainRegister = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #121214;
 `;
-export const LogoBox = styled.div`
-  margin-bottom: 45px;
+AppMainRegister.displayName = "AppMainRegister";
+
+export const LogoAndButtonBox = styled.div`
+  width: 30%;
+  min-width: 375px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 8px;
 
   .registerLogo {
     width: 122px;
-    height: 21px;
+    height: 20px;
   }
   .voltarButton {
     background: #212529;
@@ -30,14 +38,16 @@ export const LogoBox = styled.div`
     color: #f8f9fa;
     cursor: pointer;
   }
+  @media (max-width: 395px) {
+    width: 80%;
+  }
 `;
-
+LogoAndButtonBox.displayName = "LogoAndButtonBox";
 // .App {
 //   width: 100vw;
 //   height: 100vh;
 //   display: flex;
 //   flex-direction: column;
-//   justify-content: center;
+//   justify-content: flex-start;
 //   align-items: center;
 //   background: #121214;
-// }

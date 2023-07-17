@@ -7,8 +7,12 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 
-function Login({}) {
-  const [loading, setLoading] = useState(false);
+export interface ILoginFormData {
+  email: string;
+  password: string;
+}
+
+function Login() {
   const { userLogin } = useContext(UserContext);
   const loginSchema = yup.object().shape({
     email: yup.string().required("Email obrigatório").email("Email inválido"),
@@ -16,15 +20,15 @@ function Login({}) {
   });
   //----------
 
-  const submit = async (data) => {
-    userLogin(data, setLoading);
+  const submit = async (data: ILoginFormData) => {
+    userLogin(data);
   };
   //----------
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ILoginFormData>({
     resolver: yupResolver(loginSchema),
   });
   //----------

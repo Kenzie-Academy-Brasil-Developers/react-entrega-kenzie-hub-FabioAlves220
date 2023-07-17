@@ -10,7 +10,7 @@ const TechCard = ({ tech }) => {
       <h1 className="techTitle">{tech.title}</h1>
       <span className="techStatus">{tech.status}</span>
       <button className="deleteButton" onClick={() => deleteTech(tech.id)}>
-        <img className="deleteIcon" src={deleteicon} />
+        <img className="deleteIcon" src={deleteicon} alt="delete icon" />
       </button>
     </StyledTechCard>
   );

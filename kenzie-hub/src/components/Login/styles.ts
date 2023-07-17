@@ -1,5 +1,8 @@
 import styled from "styled-components";
 export const FormBox = styled.div`
+  width: 30%;
+  min-width: 375px;
+  height: auto;
   background: #212529;
   box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
@@ -13,7 +16,7 @@ export const FormBox = styled.div`
   .form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
   .form > label {
     align-self: flex-start;
@@ -25,7 +28,7 @@ export const FormBox = styled.div`
     color: #f8f9fa;
   }
   .form > input {
-    margin-top: 22px;
+    margin-top: 10px;
     margin-bottom: 22px;
     height: 48px;
     background: #343b41;
@@ -61,13 +64,13 @@ export const FormBox = styled.div`
     line-height: 26px;
     color: #ffffff;
     cursor: pointer;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
   .emailLabel {
     margin-top: 22px;
   }
   .loginTitle {
-    margin-top: 30px;
+    margin-top: 27px;
     font-family: "Inter";
     font-style: normal;
     font-weight: 700;
@@ -86,7 +89,7 @@ export const FormBox = styled.div`
     text-align: center;
   }
   .registerRouterButton {
-    margin-top: 22px;
+    margin-top: 15px;
     border: 1.2182px solid #868e96;
     border-radius: 4px;
     background: #868e96;
